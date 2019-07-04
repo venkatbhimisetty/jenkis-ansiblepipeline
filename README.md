@@ -1,2 +1,2 @@
-# jenkins-ansible
-ansible roles for jenkins pipe line
+# nginx_playbook
+nginx+nodej 

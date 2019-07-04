@@ -1,0 +1,10 @@
+---
+- name: Copy ansible public key to manage host
+  gather_facts: False
+  authorized_key:
+      user: ubuntu
+      state: present
+      key: "{{ lookup('file', '/var/lib/jenkins/.ssh/id_rsa.pub') }}" 
+  tags: 
+    - pkey
+

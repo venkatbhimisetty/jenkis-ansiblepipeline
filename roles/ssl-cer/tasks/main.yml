@@ -1,0 +1,25 @@
+---
+- name: Generate a Self Signed OpenSSL certificate
+  openssl_certificate:
+         path: /etc/ssl/crt/nginx-selfsigned.crt
+         privatekey_path: /etc/ssl/private//nginx-selfsigned.pem
+         csr_path: /etc/ssl/csr//nginx-selfsigned.csr
+         provider: selfsigned
+
+- name: Ensure that a certificate uses a modern signature algorithm (no SHA1, MD5 or DSA)
+  openssl_certificate:
+         path: /etc/ssl/crt/nginx-selfsigned.crt
+         provider: assertonly
+         signature_algorithms:
+            - sha224WithRSAEncryption
+            - sha256WithRSAEncryption
+            - sha384WithRSAEncryption
+            - sha512WithRSAEncryption
+            - sha224WithECDSAEncryption
+            - sha256WithECDSAEncryption
+            - sha384WithECDSAEncryption
+            - sha512WithECDSAEncryption
+
+- name: Generate Diffie-Hellman parameters with the default size (4096 bits)
+  openssl_dhparam:
+  path: /etc/ssl/dhparams.pem
